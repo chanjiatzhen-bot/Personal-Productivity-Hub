@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack's Hub - Personal Workspace</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Lottie Script for your Meme Animation -->
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+<body class="hub-app">
+
+    <!-- Moving Background Animation -->
+    <div class="aura-bg">
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <div class="container">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="profile-box">
+                <h2>Jack's <span>Hub</span></h2>
+            </div>
+            
+            <div class="glass-card music-widget">
+                <div class="music-header">
+                    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Vibe Zone</h3>
+                    <button class="settings-btn" onclick="toggleMediaInput()"><i class="fa-solid fa-gear"></i></button>
+                </div>
+
+                <!-- Media Input area (Hidden by default) -->
+                <div id="media-input-box" class="media-input-area" style="display: none;">
+                    <input type="text" id="media-url" placeholder="Paste Lottie Link...">
+                    <button onclick="updateMedia()" class="btn-glow" style="padding: 5px;">Load</button>
+                </div>
+
+                <!-- YOUR NEW MEME ANIMATION -->
+                <div id="player-container">
+                    <dotlottie-player 
+                        src="https://lottie.host/07034a67-5ae6-4b96-82f7-e0761150bd2c/iRVU9IJazp.lottie" 
+                        background="transparent" 
+                        speed="1" 
+                        style="width: 100%; height: 100%;" 
+                        loop 
+                        autoplay>
+                    </dotlottie-player>
+                </div>
+
+                <div class="media-controls">
+                    <small id="player-type">Meme Mode</small>
+                    <i class="fa-solid fa-bolt" style="color: var(--accent); font-size: 1rem;"></i>
+                </div>
+            </div>
+
+            <nav class="side-nav">
+                <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="notes.html"><i class="fa-solid fa-note-sticky"></i> AI Notes</a>
+                <a href="calendar.html"><i class="fa-solid fa-calendar-days"></i> Schedule</a>
+                <a href="tasks.html"><i class="fa-solid fa-list-check"></i> Missions</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN WORKSPACE -->
+        <section class="main-workspace">
+            <div class="welcome-box">
+                <h1>Welcome back, <span>Jack</span></h1>
+                <p id="live-clock">00:00:00</p>
+            </div>
+
+            <div class="glass-card ai-notes">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> AI Notepad</h3>
+                    <span class="badge">Experimental</span>
+                </div>
+                <textarea id="note-input" placeholder="Start typing your thoughts..."></textarea>
+                <div class="actions">
+                    <button class="btn-glow" onclick="askAI('summarize')">Summarize</button>
+                    <button class="btn-glow" onclick="askAI('tasks')">Create Tasks</button>
+                </div>
+            </div>
+
+            <div class="glass-card todo-box">
+                <h3><i class="fa-solid fa-rocket"></i> Daily Missions</h3>
+                <div class="todo-input">
+                    <input type="text" id="task-input" placeholder="Add a new mission...">
+                    <button onclick="addTask()" class="btn-add">+</button>
+                </div>
+                <ul id="task-list"></ul>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: CALENDAR & AGENDA -->
+        <section class="right-panel">
+            <div class="glass-card calendar-card">
+                <div class="calendar-header">
+                    <button id="prev" class="calendar-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <h3 id="month-year">Month Year</h3>
+                    <button id="next" class="calendar-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-labels">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                </div>
+                <div class="calendar-grid" id="calendar-days">
+                    <!-- JS fills this -->
+                </div>
+            </div>
+
+            <div class="glass-card home-agenda-card">
+                <h3><i class="fa-solid fa-calendar-check"></i> Today's Agenda</h3>
+                <div id="home-agenda-list" class="mini-agenda-list">
+                    <!-- JS will pull today's events here -->
+                </div>
+            </div>
+        </section>
+    </div> <!-- Close Main Container -->
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="js/hub.js"></script>
+</body>
+</html>

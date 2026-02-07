@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control - Jack's Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hub-app">
+
+    <div class="aura-bg"><div class="blob"></div></div>
+
+    <div class="container task-page-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="profile-box"><h2>Jack's <span>Hub</span></h2></div>
+            <nav class="side-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="notes.html"><i class="fa-solid fa-note-sticky"></i> AI Notes</a>
+                <a href="calendar.html"><i class="fa-solid fa-calendar-days"></i> Schedule</a>
+                <a href="tasks.html" class="active"><i class="fa-solid fa-list-check"></i> Missions</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN TASK BOARD -->
+        <section class="tasks-main">
+            <!-- Progress Bar -->
+            <div class="glass-card progress-card">
+                <div class="progress-info">
+                    <h3>Daily Completion</h3>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Task Board -->
+            <div class="task-board">
+                <!-- Column 1: To-Do -->
+                <div class="task-column">
+                    <div class="column-header">
+                        <h4><i class="fa-solid fa-circle-dot"></i> Available</h4>
+                        <button class="add-task-inline" onclick="openTaskInput()">+</button>
+                    </div>
+                    
+                    <!-- Hidden Input Area -->
+                    <div class="inline-input-box" id="input-area" style="display:none;">
+                        <input type="text" id="new-task-text" placeholder="Mission name...">
+                        <select id="new-task-cat">
+                            <option value="it">Study</option>
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                        </select>
+                        <button onclick="saveNewTask()">Deploy</button>
+                    </div>
+
+                    <div class="task-list" id="list-todo"></div>
+                </div>
+
+                <!-- Column 2: In Progress -->
+                <div class="task-column">
+                    <div class="column-header">
+                        <h4><i class="fa-solid fa-bolt"></i> Active</h4>
+                    </div>
+                    <div class="task-list" id="list-doing"></div>
+                </div>
+
+                <!-- Column 3: Completed -->
+                <div class="task-column">
+                    <div class="column-header">
+                        <h4><i class="fa-solid fa-circle-check"></i> Finished</h4>
+                    </div>
+                    <div class="task-list" id="list-done"></div>
+                </div>
+            </div>
+            
+            <div class="inline-input-box" id="input-area" style="display:none;">
+    <input type="text" id="new-task-text" placeholder="Mission name...">
+    
+    <select id="new-task-cat">
+        <option value="IT Study">IT Study</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+    </select>
+    
+    <button onclick="saveNewTask()">Deploy Mission</button>
+</div>
+
+        </section>
+    </div>
+
+    <script src="js/tasks.js"></script>
+</body>
+</html>

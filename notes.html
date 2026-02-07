@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workspace - Jack's Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hub-app">
+
+    <div class="aura-bg"><div class="blob"></div></div>
+
+    <div class="container notes-layout">
+        <!-- Sidebar Navigation (Same as Dashboard) -->
+        <aside class="sidebar">
+            <div class="profile-box"><h2>Jack's <span>Hub</span></h2></div>
+            <nav class="side-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="notes.html" class="active"><i class="fa-solid fa-note-sticky"></i> AI Notes</a>
+                <a href="calendar.html"><i class="fa-solid fa-calendar-days"></i> Schedule</a>
+                <a href="tasks.html"><i class="fa-solid fa-list-check"></i> Missions</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN EDITOR -->
+        <section class="editor-section">
+            <div class="glass-card editor-card">
+                <input type="text" id="note-title" placeholder="Untitled Note..." class="title-input">
+                <textarea id="main-note-area" placeholder="Write your thoughts here... Use the AI on the right to process them."></textarea>
+                <div class="editor-footer">
+                    <span id="save-status">Saved to cloud</span>
+                    <span id="char-count">0 characters</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI COMMAND CENTER -->
+        <aside class="ai-sidebar">
+            <div class="glass-card ai-tool-card">
+                <h3><i class="fa-solid fa-robot"></i> AI Co-Pilot</h3>
+                <p class="ai-hint">Select text or use buttons below:</p>
+                
+                <div class="ai-button-grid">
+                    <button class="ai-tool-btn" onclick="aiAction('summarize')">
+                        <i class="fa-solid fa-align-left"></i> Summarize
+                    </button>
+                    <button class="ai-tool-btn" onclick="aiAction('fix')">
+                        <i class="fa-solid fa-spell-check"></i> Fix Grammar
+                    </button>
+                    <button class="ai-tool-btn" onclick="aiAction('expand')">
+                        <i class="fa-solid fa-arrow-up-right-dots"></i> Expand Idea
+                    </button>
+                    <button class="ai-tool-btn" onclick="aiAction('tone')">
+                        <i class="fa-solid fa-face-smile"></i> Change Tone
+                    </button>
+                </div>
+
+                <div class="ai-response-box" id="ai-response">
+                    <p class="placeholder-text">AI feedback will appear here...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/notes.js"></script>
+</body>
+</html>

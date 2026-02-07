@@ -1,0 +1,895 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --accent: #b74b4b;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-dim: #aaa;
+}
+
+body {
+    background: #080808;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Media Player / Vibe Widget Fix --- */
+.music-widget {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+/* The header of the widget */
+.music-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.music-header h3 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* FIX: The box that holds the Nyan Cat */
+#player-container {
+    width: 100%;
+    height: 100px; /* Fixed height keeps it from growing */
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* THIS KEEPS THE TAIL INSIDE THE BOX */
+    position: relative;
+}
+
+/* Style for the Lottie Player itself */
+dotlottie-player {
+    width: 120% !important; /* Slightly larger to fill the space */
+    height: 120% !important;
+}
+
+/* Bottom status row */
+.media-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+.media-controls small {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+}
+
+.settings-btn {
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+
+.settings-btn:hover {
+    color: white;
+    transform: rotate(45deg);
+}
+
+/* Fix for the "Load" Input area so it doesn't overlap */
+.media-input-area {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.media-input-area input {
+    width: 100%;
+    padding: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 5px;
+    color: white;
+    font-size: 1.1rem;
+}
+
+/* Moving Aura Background */
+.aura-bg {
+    position: fixed;
+    width: 100%; height: 100%;
+    z-index: -1;
+    filter: blur(120px);
+}
+.blob {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: var(--accent);
+    opacity: 0.12;
+    border-radius: 50%;
+    animation: move 25s infinite alternate;
+}
+.blob:last-child {
+    right: 0; bottom: 0;
+    background: #4e1414;
+    animation-delay: -5s;
+}
+@keyframes move {
+    from { transform: translate(-10%, -10%); }
+    to { transform: translate(20%, 20%); }
+}
+
+/* Layout Container */
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr 380px;
+    gap: 25px;
+    width: 95%;
+    height: 90vh;
+}
+
+/* Glass Components */
+.sidebar, .glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Sidebar */
+.profile-box h2 { font-size: 2.4rem; margin-bottom: 3rem; }
+.profile-box span { color: var(--accent); }
+
+.music-widget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.02);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+}
+.music-info p { font-size: 1.3rem; font-weight: 600; }
+.music-info small { color: var(--accent); font-size: 1.1rem; }
+#music-btn {
+    width: 35px; height: 35px; border-radius: 50%;
+    background: var(--accent); color: white; cursor: pointer;
+}
+
+/* --- Media Player Widget --- */
+.music-widget {
+    padding: 2rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.music-header h3 { font-size: 1.6rem; color: var(--accent); display: flex; align-items: center; gap: 10px; }
+
+#player-container {
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+/* Smart Input Styling */
+.media-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.media-input-area input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.media-input-area button {
+    background: var(--accent);
+    color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.media-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+}
+
+.settings-btn {
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+.settings-btn:hover { color: white; }
+
+/* Disc Animation when playing */
+.playing-icon {
+    animation: spin 3s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.side-nav { display: flex; flex-direction: column; gap: 1.5rem; }
+.side-nav a {
+    color: var(--text-dim);
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s;
+}
+.side-nav a:hover, .side-nav a.active { color: white; transform: translateX(8px); }
+.side-nav a.active i { color: var(--accent); }
+
+/* Welcome Section */
+.welcome-box { margin-bottom: 1rem; padding-left: 1rem; }
+.welcome-box h1 { font-size: 3.2rem; font-weight: 800; }
+.welcome-box span { color: var(--accent); }
+#live-clock { font-size: 1.8rem; opacity: 0.5; font-family: monospace; letter-spacing: 2px; }
+
+/* Main Workspace */
+.main-workspace { display: flex; flex-direction: column; gap: 20px; }
+.ai-notes { flex: 1.5; display: flex; flex-direction: column; }
+.card-header { display: flex; justify-content: space-between; align-items: center; }
+.badge { font-size: 1.1rem; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px; color: var(--text-dim); }
+
+#note-input {
+    flex: 1; background: transparent; border: none;
+    color: white; font-size: 1.6rem; resize: none;
+    margin: 1.5rem 0; outline: none;
+}
+
+.btn-glow {
+    background: var(--accent);
+    color: white; border: none;
+    padding: 1rem 2rem; border-radius: 10px;
+    cursor: pointer; font-weight: 700; transition: 0.3s;
+}
+.btn-glow:hover { box-shadow: 0 0 20px var(--accent); transform: translateY(-2px); }
+
+/* To-Do Section */
+.todo-input { display: flex; gap: 10px; margin-top: 1rem; }
+.todo-input input {
+    flex: 1; background: rgba(255,255,255,0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px; padding: 1.2rem; color: white;
+}
+.btn-add { background: white; color: black; width: 45px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+#task-list { list-style: none; margin-top: 1.5rem; max-height: 150px; overflow-y: auto; }
+#task-list li {
+    background: rgba(255,255,255,0.02);
+    padding: 1rem 1.5rem; border-radius: 10px;
+    margin-bottom: 0.8rem; display: flex; justify-content: space-between;
+}
+
+/* Calendar Section */
+.calendar-labels {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    text-align: center; font-weight: 800; color: var(--accent); margin: 2rem 0 1rem;
+}
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.calendar-day {
+    aspect-ratio: 1/1; display: flex; justify-content: center; align-items: center;
+    font-size: 1.4rem; border-radius: 50%; cursor: pointer; transition: 0.3s;
+}
+.calendar-day.today { background: var(--accent); color: white; font-weight: bold; box-shadow: 0 0 15px var(--accent); }
+.calendar-day:hover:not(.empty) { background: rgba(255,255,255,0.1); }
+
+/* --- Calendar Navigation --- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-btn {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.calendar-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+#month-year {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.event-item-mini {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+
+
+/* --- Notes Page Layout --- */
+.notes-layout {
+    grid-template-columns: 250px 1fr 320px; /* Sidebar | Editor | AI Tools */
+}
+
+.editor-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem !important;
+}
+
+.title-input {
+    background: transparent;
+    border: none;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 2rem;
+    outline: none;
+}
+
+#main-note-area {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ddd;
+    font-size: 1.8rem;
+    line-height: 1.8;
+    resize: none;
+    outline: none;
+}
+
+.editor-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    font-size: 1.2rem;
+}
+
+/* AI Tool Sidebar */
+.ai-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.ai-tool-btn {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.ai-tool-btn:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+
+.ai-response-box {
+    background: rgba(0,0,0,0.2);
+    border-radius: 15px;
+    padding: 1.5rem;
+    min-height: 150px;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #2ecc71; /* AI text in green */
+}
+
+/* --- Re-arranged AI Sidebar --- */
+.ai-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-tool-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ai-tool-card h3 {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent);
+}
+
+.ai-hint {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+/* FIX: Improved Grid Layout */
+.ai-button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 1.2rem;
+    margin: 1rem 0;
+}
+
+.ai-tool-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 1.5rem 0.5rem; /* Balanced padding */
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 90px; /* Ensures all buttons are the same height */
+}
+
+/* Icon size inside buttons */
+.ai-tool-btn i {
+    font-size: 1.8rem;
+    opacity: 0.8;
+}
+
+/* Hover effects to make it feel high-tech */
+.ai-tool-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(183, 75, 75, 0.2);
+}
+
+.ai-tool-btn:hover i {
+    opacity: 1;
+}
+
+/* --- Improved Response Box --- */
+.ai-response-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 2rem;
+    flex-grow: 1; /* Fills remaining space */
+    min-height: 180px;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #2ecc71; /* High-tech terminal green */
+    position: relative;
+    overflow-y: auto;
+}
+
+/* Add a subtle glow to the response box */
+.ai-response-box::before {
+    content: 'AI OUTPUT';
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    opacity: 0.3;
+    color: white;
+}
+
+.placeholder-text {
+    color: var(--text-dim);
+    font-style: italic;
+    opacity: 0.5;
+}
+
+/* --- Calendar Page Specific Layout --- */
+.calendar-page-layout {
+    grid-template-columns: 250px 1fr 350px;
+}
+
+.calendar-main-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-calendar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem !important;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+}
+
+.curr-month-display h1 { font-size: 4rem; font-weight: 800; line-height: 1; }
+.curr-month-display h2 { font-size: 2rem; color: var(--accent); opacity: 0.8; }
+
+.nav-btns { display: flex; align-items: center; gap: 1.5rem; }
+.nav-icon {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: white;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.nav-icon:hover { background: var(--accent); border-color: var(--accent); }
+
+.btn-small {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Big Grid Logic */
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1rem;
+}
+.calendar-days-header span {
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.calendar-grid-large {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    flex: 1;
+}
+
+.day-box {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    aspect-ratio: 1.2 / 1;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+
+.day-box:hover { background: rgba(255,255,255,0.05); transform: scale(1.02); }
+.day-box.today { border-color: var(--accent); background: rgba(183, 75, 75, 0.1); }
+.day-box.today::after {
+    content: 'TODAY';
+    position: absolute;
+    bottom: 5px; right: 8px;
+    font-size: 0.8rem; font-weight: 800; color: var(--accent);
+}
+
+.day-box.has-event::before {
+    content: '';
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* Agenda Sidebar */
+.agenda-card { height: 100%; display: flex; flex-direction: column; }
+.agenda-header { margin-bottom: 2.5rem; }
+.agenda-header h3 { font-size: 2.2rem; }
+
+.event-list { flex: 1; overflow-y: auto; }
+.event-item {
+    padding: 1.2rem;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    border-left: 3px solid var(--accent);
+}
+
+.add-event-box { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.add-event-box input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    padding: 1rem; border-radius: 8px; color: white;
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.delete-icon {
+    font-size: 1.2rem;
+    color: #888;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.delete-icon:hover {
+    color: var(--accent);
+}
+
+/* --- Mission Control Layout --- */
+.task-page-layout {
+    grid-template-columns: 250px 1fr; /* No right panel needed for tasks */
+}
+
+.tasks-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Progress Bar Styling */
+.progress-card {
+    padding: 2rem 3rem !important;
+}
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.progress-info h3 { font-size: 1.8rem; font-weight: 700; }
+#progress-percent { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+
+.progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+    transition: 0.8s ease;
+}
+
+/* Kanban Board */
+.task-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    flex: 1;
+}
+
+.task-column {
+    background: rgba(255,255,255,0.01);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.column-header h4 { font-size: 1.4rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+.task-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Individual Task Card */
+.task-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.task-item:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+.task-item h5 { font-size: 1.6rem; margin-bottom: 5px; }
+.task-tag {
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 5px;
+    background: rgba(183, 75, 75, 0.2);
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+/* Inline Input Area */
+.inline-input-box {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.inline-input-box input, .inline-input-box select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    padding: 1rem; border-radius: 10px; color: white;
+}
+
+/* --- Fix for the Mission Input Area --- */
+.inline-input-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 1.2rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.inline-input-box input, 
+.inline-input-box select {
+    width: 100%;
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: white;
+    font-size: 1.4rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* FIX: Dark theme for the dropdown options */
+.inline-input-box select option {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.inline-input-box input:focus, 
+.inline-input-box select:focus {
+    border-color: var(--accent);
+}
+
+/* FIX: Premium Deploy Button */
+.inline-input-box button {
+    background: var(--accent);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.inline-input-box button:hover {
+    background: #9e3f3f;
+    box-shadow: 0 5px 15px rgba(183, 75, 75, 0.3);
+}
+
+/* Fix for the "+" Add Button in the Header */
+.add-task-inline {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.add-task-inline:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}

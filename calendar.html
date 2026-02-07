@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner - Jack's Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hub-app">
+
+    <div class="aura-bg"><div class="blob"></div></div>
+
+    <div class="container calendar-page-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="profile-box"><h2>Jack's <span>Hub</span></h2></div>
+            <nav class="side-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="notes.html"><i class="fa-solid fa-note-sticky"></i> AI Notes</a>
+                <a href="calendar.html" class="active"><i class="fa-solid fa-calendar-days"></i> Schedule</a>
+                <a href="tasks.html"><i class="fa-solid fa-list-check"></i> Missions</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CALENDAR -->
+        <section class="calendar-main-section">
+            <div class="glass-card full-calendar">
+                <div class="calendar-controls">
+                    <div class="curr-month-display">
+                        <h1 id="display-month">February</h1>
+                        <h2 id="display-year">2026</h2>
+                    </div>
+                    <div class="nav-btns">
+                        <button id="prev-month" class="nav-icon"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button id="go-today" class="btn-small">Today</button>
+                        <button id="next-month" class="nav-icon"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="calendar-wrapper">
+                    <div class="calendar-days-header">
+                        <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+                    </div>
+                    <div class="calendar-grid-large" id="calendar-grid">
+                        <!-- JS Generated Days -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: AGENDA -->
+        <aside class="agenda-sidebar">
+            <div class="glass-card agenda-card">
+                <div class="agenda-header">
+                    <h3 id="selected-date-label">Feb 7, 2026</h3>
+                    <p>Daily Agenda</p>
+                </div>
+                
+                <div class="event-list" id="event-list">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-calendar-plus"></i>
+                        <p>No events for this day</p>
+                    </div>
+                </div>
+
+                <div class="add-event-box">
+                    <input type="text" id="event-input" placeholder="New event...">
+                    <button class="btn-glow" onclick="saveEvent()">Add</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="js/calendar.js"></script>
+</body>
+</html>
