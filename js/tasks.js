@@ -1,14 +1,14 @@
-let tasks = JSON.parse(localStorage.getItem('hub_tasks')) || [];
+let tasks = JSON.parse(localStorage.getItem('jackhub_tasks')) || [];
 
 function renderTasks() {
-    const containers = {
-        todo: document.getElementById('list-todo'),
-        doing: document.getElementById('list-doing'),
-        done: document.getElementById('list-done')
-    };
+    const todoList = document.getElementById('list-todo');
+    const doingList = document.getElementById('list-doing');
+    const doneList = document.getElementById('list-done');
 
-    // Clear lists
-    Object.values(containers).forEach(c => c.innerHTML = "");
+    if (!todoList) return;
+
+    // Clear all columns
+    todoList.innerHTML = ""; doingList.innerHTML = ""; doneList.innerHTML = "";
 
     tasks.forEach((task, index) => {
         const div = document.createElement('div');
@@ -22,31 +22,32 @@ function renderTasks() {
                 <small onclick="deleteTask(${index})" style="cursor:pointer; color:#777; margin-left:auto">Delete</small>
             </div>
         `;
-        containers[task.status].appendChild(div);
+        
+        if (task.status === 'todo') todoList.appendChild(div);
+        else if (task.status === 'doing') doingList.appendChild(div);
+        else doneList.appendChild(div);
     });
 
     updateProgress();
-    localStorage.setItem('hub_tasks', JSON.stringify(tasks));
-}
-
-function moveTask(index, direction) {
-    const statusOrder = ['todo', 'doing', 'done'];
-    let currentIdx = statusOrder.indexOf(tasks[index].status);
-
-    if (direction === 'next' && currentIdx < 2) tasks[index].status = statusOrder[currentIdx + 1];
-    if (direction === 'prev' && currentIdx > 0) tasks[index].status = statusOrder[currentIdx - 1];
-
-    renderTasks();
+    localStorage.setItem('jackhub_tasks', JSON.stringify(tasks));
 }
 
 function saveNewTask() {
-    const text = document.getElementById('new-task-text').value;
-    const cat = document.getElementById('new-task-cat').value;
-    if (!text) return;
+    const text = document.getElementById('new-task-text');
+    const cat = document.getElementById('new-task-cat');
+    if (!text.value) return;
 
-    tasks.push({ text, category: cat, status: 'todo' });
-    document.getElementById('new-task-text').value = "";
+    tasks.push({ text: text.value, category: cat.value, status: 'todo' });
+    text.value = "";
     document.getElementById('input-area').style.display = "none";
+    renderTasks();
+}
+
+function moveTask(index, direction) {
+    const order = ['todo', 'doing', 'done'];
+    let curIdx = order.indexOf(tasks[index].status);
+    if (direction === 'next' && curIdx < 2) tasks[index].status = order[curIdx + 1];
+    if (direction === 'prev' && curIdx > 0) tasks[index].status = order[curIdx - 1];
     renderTasks();
 }
 
@@ -56,20 +57,24 @@ function deleteTask(index) {
 }
 
 function updateProgress() {
+    const fill = document.getElementById('progress-fill');
+    const percentTxt = document.getElementById('progress-percent');
+    if (!fill) return;
+
     if (tasks.length === 0) {
-        document.getElementById('progress-fill').style.width = "0%";
-        document.getElementById('progress-percent').innerText = "0%";
+        fill.style.width = "0%";
+        percentTxt.innerText = "0%";
         return;
     }
-    const doneCount = tasks.filter(t => t.status === 'done').length;
-    const percent = Math.round((doneCount / tasks.length) * 100);
-    document.getElementById('progress-fill').style.width = percent + "%";
-    document.getElementById('progress-percent').innerText = percent + "%";
+    const done = tasks.filter(t => t.status === 'done').length;
+    const percent = Math.round((done / tasks.length) * 100);
+    fill.style.width = percent + "%";
+    percentTxt.innerText = percent + "%";
 }
 
 function openTaskInput() {
-    const el = document.getElementById('input-area');
-    el.style.display = el.style.display === "none" ? "block" : "none";
+    const area = document.getElementById('input-area');
+    area.style.display = area.style.display === "none" ? "block" : "none";
 }
 
-renderTasks();
+document.addEventListener('DOMContentLoaded', renderTasks);
