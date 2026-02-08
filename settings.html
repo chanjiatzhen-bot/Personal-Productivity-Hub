@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack's Hub - Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hub-app">
+    <div class="aura-bg"><div class="blob"></div></div>
+
+    <div class="container">
+        <!-- SIDEBAR (Same as other pages) -->
+        <aside class="sidebar">
+            <div class="profile-box"><h2>Jack's <span>Hub</span></h2></div>
+            <nav class="side-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="notes.html"><i class="fa-solid fa-note-sticky"></i> AI Notes</a>
+                <a href="calendar.html"><i class="fa-solid fa-calendar-days"></i> Schedule</a>
+                <a href="tasks.html"><i class="fa-solid fa-list-check"></i> Missions</a>
+                <a href="settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN SETTINGS AREA -->
+        <section class="main-workspace">
+            <div class="welcome-box">
+                <h1>Hub <span>Settings</span></h1>
+                <p>Manage your local database and backup files.</p>
+            </div>
+
+            <div class="glass-card">
+                <h3><i class="fa-solid fa-database"></i> Data Management</h3>
+                <p style="color: var(--text-dim); font-size: 1.4rem; margin: 1rem 0 2rem;">
+                    Download all your notes, missions, and financial data directly to your laptop.
+                </p>
+
+                <div class="settings-action-group">
+                    <!-- SAVE TO LAPTOP -->
+                    <button class="btn-glow" onclick="downloadBackup()">
+                        <i class="fa-solid fa-download"></i> Save to Laptop (.json)
+                    </button>
+
+                    <!-- RESTORE FROM LAPTOP -->
+                    <input type="file" id="import-file" style="display:none" onchange="importBackup(event)">
+                    <button class="btn-glow" onclick="document.getElementById('import-file').click()" style="background: #444;">
+                        <i class="fa-solid fa-upload"></i> Restore from File
+                    </button>
+                </div>
+            </div>
+
+            <!-- DANGER ZONE -->
+            <div class="glass-card" style="margin-top: 2rem; border-color: rgba(183, 75, 75, 0.3);">
+                <h3 style="color: var(--accent);">Danger Zone</h3>
+                <p style="color: var(--text-dim); font-size: 1.3rem; margin-bottom: 1.5rem;">This will wipe your browser memory. Make sure you have a backup!</p>
+                <button onclick="clearEverything()" style="background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 10px; border-radius: 8px; cursor: pointer;">
+                    Reset Hub Memory
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/settings.js"></script>
+</body>
+</html>
